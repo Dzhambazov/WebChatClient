@@ -27,7 +27,7 @@
 	function buildChatUI() {
 	    var html ='<div id="main" data-role="page" id="page1">' +
 	    ' <div data-theme="b" data-role="header">' +
-	    '<img src="http://png.findicons.com/files/icons/1278/quickpix_2006/128/black_cat.png" width="60" height="60" no-repeat />' +
+	    '<img src="https://dl.dropboxusercontent.com/s/3v8l4mflw50mtqz/default_avatar1234375017.jpg?token_hash=AAH4OQXSsLs4ZjTQYLzKkn_Wc8loL8aKnnX8xhi9t-z40A\u0026dl=1\" width="60" height="60" no-repeat />' +
 	    '<a id="changeAvatar" href="#" data-role="button" data-inline="true" data-theme="b">Change</a>' +
 	    '<h3> Username</h3>' +
 	    '<a id="bttn-logout" href="#" data-role="button" data-inline="true" data-theme="b">Logout</a>' +
