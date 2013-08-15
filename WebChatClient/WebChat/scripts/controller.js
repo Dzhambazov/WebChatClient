@@ -8,13 +8,14 @@ var controllers = (function () {
     var updateTimer = null;
 
     var rootUrl = "http://teammilhouse-2.apphb.com/api/";
+    var loggedUser;
     var Controller = Class.create({
         init: function () {
             this.persister = persisters.get(rootUrl);
         },
         loadUI: function (selector) {
             if (this.persister.isUserLoggedIn()) {
-                this.loadGameUI(selector);
+                this.loadGameUI(selector, loggedUser);
             }
             else {
                 this.loadLoginFormUI(selector);
@@ -57,7 +58,8 @@ var controllers = (function () {
                 console.log(user.password);
 
                 self.persister.user.login(user, function (newUser) {
-                    self.loadGameUI(selector, newUser);
+                    loggedUser = newUser;
+                    self.loadGameUI(selector, loggedUser);
                     location.reload();
                 }, function (err) {
                     wrapper.find("#error-messages").text(err.responseJSON.Message);
@@ -75,8 +77,9 @@ var controllers = (function () {
                     password: $(selector).find("#passReg").val(),
                     repassword: $(selector + " #rePassReg").val()
                 }
-                self.persister.user.register(user, function () {
-                    self.loadGameUI(selector);
+                self.persister.user.register(user, function (newUser) {
+                    loggedUser = newUser;
+                    self.loadGameUI(selector, loggedUser);
                 }, function (err) {
                     wrapper.find("#error-messages").text(err.responseJSON.Message);
                 });
