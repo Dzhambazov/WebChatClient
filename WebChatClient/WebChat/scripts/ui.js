@@ -24,20 +24,45 @@
         return html;
     }
 
-    function buildChatUI(user) {
-        var html = '<div id="main" data-role="page" id="page1">' +
-	    ' <div data-theme="b" data-role="header">' +
-	    '<img src="' + user.Avatar + '" width="60" height="60" no-repeat />' +
-	    '<a id="changeAvatar" href="#" data-role="button" data-inline="true" data-theme="b">Change</a>' +
-	    '<h3> Username</h3>' +
-	    '<a id="bttn-logout" href="#" data-role="button" data-inline="true" data-theme="b">Logout</a>' +
-	    '</div>' +
-	    '<div data-theme="b" data-role="footer" data-position="fixed">' +
-	    '<h3> Web Chat</h3>' +
-	    '</div>' +
+    function buildChatUI(username) {
+        var html =
+        '<div id="main" data-role="page" id="page1">' +
+	        '<div data-theme="b" data-role="header">' +
+	            '<img src="' + localStorage.getItem("avatar") + '" width="60" height="60" no-repeat />' +
+	            '<a id="changeAvatar" href="#" data-role="button" data-inline="true" data-theme="b">Change</a>' +
+	            '<h3>Welcome ' + username + '</h3>' +
+	            '<a id="bttn-logout" href="#" data-role="button" data-inline="true" data-theme="b">Logout</a>' +
+	        '</div>' +
+	        '<div id="footer" data-theme="b" data-role="footer" data-position="fixed">' +
+	            '<h3> Web Chat</h3>' +
+	        '</div>' +
 	    '</div>';
         return html;
     }
+
+    function addChatUsers(data) {
+        var username = localStorage.getItem("username");
+        var chats = "";
+        var users = '<div id="users" data-role="content" style="width:250px;">' +
+        '<div id="acc-container" data-role="collapsible-set" data-theme="b" data-content-theme="a">';
+        for (var i = 0; i < data.length; i++) {
+            if (username != data[i].username) {
+                users += '<button class="otherUsers"><img src="http://png.findicons.com/files/icons/2166/oxygen/64/kbugbuster.png"  width="40" height="40"/><span>' + data[i].username + '</span></button>';
+                chats += '<div id="textFields" class="chat" name="' + data[i].username + '">' +
+                        '<textarea id="received"></textarea>' +
+                        '<textarea id="send"></textarea>' +
+                        '<a href="#" data-role="button" data-inline="true" data-theme="b" style="margin-top:-35px">Send</a>' +
+                    '</div>';
+            }
+        }
+
+        users += '</div></div>';
+
+        $("#footer").before(users);
+        $("#users").after(chats);
+    }
+
+
 
     // function buildOpenGamesList(games) {
     // 	var list = '<ul class="game-list open-games">';
@@ -155,6 +180,7 @@
     return {
         loginForm: buildLoginForm,
         chatUI: buildChatUI,
+        addChatUsers: addChatUsers,
         // openGamesList: buildOpenGamesList,
         // activeGamesList: buildActiveGamesList,
         // gameState: buildGameState,

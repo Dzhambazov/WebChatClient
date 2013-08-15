@@ -82,6 +82,7 @@ a#changeAvatar{
 }
 
 #users{
+    margin: 20px;
     float: left;
 }
 
@@ -106,4 +107,17 @@ textarea#send{
 #wtf{
     width: 20%;
     display: inline-block;
+}
+
+.chat {
+    display: none;
+}
+
+.activated {
+    background: green;
+    color: #EEEEFF;
+}
+
+.otherUsers {
+    cursor: pointer;
 }
