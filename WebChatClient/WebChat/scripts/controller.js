@@ -96,7 +96,7 @@ var controllers = (function () {
             });
 
             wrapper.on("click", "#changeAvatar", function () {
-
+                window.open('uploadFile.html', '_blank');
             })
 
 

@@ -2,14 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <script src="scripts/ui.js"></script>
-    <script src="scripts/tab.js"></script>
-    <script src="scripts/persister.js"></script>
-    <script src="scripts/jquery-2.0.2.min.js"></script>
-    <script src="scripts/http-requester.js"></script>
-    <script src="scripts/controller.js"></script>
-    <script src="scripts/class.js"></script>
-    <script src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script type="text/javascript" src="scripts/jquery-2.0.2.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/tab.js"></script>
+    <script type="text/javascript" src="scripts/http-requester.js"></script>
+    <script type="text/javascript" src="scripts/class.js"></script>
+    <script type="text/javascript" src="scripts/persister.js"></script>
+    <script type="text/javascript" src="scripts/controller.js"></script>
+    <script type="text/javascript" src="scripts/ui.js"></script>
+    <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
+
+    <script src="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 </head>
 <body>
     <form name="form1" method="post" action="api/file" enctype="multipart/form-data">
@@ -26,7 +30,7 @@
         $(function () {
             $('#Upload').click(function () {
                 var formData = new FormData($('form')[0]);
-                $.ajax({
+                var request = $.ajax({
                     url: 'teammilhouse-2.apphb.com/api/user/changeavatar/' + localStorage.getItem("sessionKey"),
                     type: 'POST',
                     // Form data
@@ -36,6 +40,10 @@
                     contentType: false,
                     processData: false
                 });
+
+                request.done(function (data) {
+                    console.log(data);
+                })
             });
         });
     </script>
