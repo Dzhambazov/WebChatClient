@@ -8,7 +8,7 @@ var controllers = (function () {
     var updateTimer = null;
 
     var rootUrl = "http://teammilhouse-2.apphb.com/api/";
-    var loggedUser;
+    var loggedUser = localStorage.getItem("user");
     var Controller = Class.create({
         init: function () {
             this.persister = persisters.get(rootUrl);
@@ -32,11 +32,11 @@ var controllers = (function () {
 				ui.chatUI(user);
             $(selector).html(gameUIHtml);
 
-            this.updateUI(selector);
+            //this.updateUI(selector);
 
-            updateTimer = setInterval(function () {
-                self.updateUI(selector);
-            }, 15000);
+            //updateTimer = setInterval(function () {
+            //    self.updateUI(selector);
+            //}, 15000);
         },
         loadGame: function (selector, gameId) {
             this.persister.game.state(gameId, function (gameState) {
@@ -51,14 +51,15 @@ var controllers = (function () {
             wrapper.on("click", "#bttn-login", function () {
                 var user = {
                     username: $(selector + " #userLog").val(),
-                    password: $(selector + " #passLog").val()
+                    password: $(selector + " #passLog").val(),
                 }
 
                 console.log(user.username);
                 console.log(user.password);
 
-                self.persister.user.login(user, function (newUser) {
+                self.persister.users.login(user, function (newUser) {
                     loggedUser = newUser;
+                    localStorage.setItem("user", JSON.stringify(loggedUser));
                     self.loadGameUI(selector, loggedUser);
                     location.reload();
                 }, function (err) {
@@ -77,8 +78,9 @@ var controllers = (function () {
                     password: $(selector).find("#passReg").val(),
                     repassword: $(selector + " #rePassReg").val()
                 }
-                self.persister.user.register(user, function (newUser) {
+                self.persister.users.register(user, function (newUser) {
                     loggedUser = newUser;
+                    localStorage.setItem("user", JSON.stringify(loggedUser));
                     self.loadGameUI(selector, loggedUser);
                 }, function (err) {
                     wrapper.find("#error-messages").text(err.responseJSON.Message);
@@ -91,9 +93,9 @@ var controllers = (function () {
 
 
             wrapper.on("click", "#bttn-logout", function () {
-                self.persister.user.logout(function () {
+                self.persister.users.logout(function () {
                     self.loadLoginFormUI(selector);
-                    clearInterval(updateTimer);
+                    //clearInterval(updateTimer);
                 }, function (err) {
                 });
             });
@@ -170,22 +172,22 @@ var controllers = (function () {
             //        self.loadGame(selector, $(this).parent().data("game-id"));
             //    });
         },
-        updateUI: function (selector) {
-            this.persister.game.open(function (games) {
-                var list = ui.openGamesList(games);
-                $(selector + " #open-games")
-					.html(list);
-            });
-            this.persister.game.myActive(function (games) {
-                var list = ui.activeGamesList(games);
-                $(selector + " #active-games")
-					.html(list);
-            });
-            this.persister.message.all(function (msg) {
-                var msgList = ui.messagesList(msg);
-                $(selector + " #messages-holder").html(msgList);
-            });
-        }
+        //updateUI: function (selector) {
+        //    this.persister.game.open(function (games) {
+        //        var list = ui.openGamesList(games);
+        //        $(selector + " #open-games")
+        //			.html(list);
+        //    });
+        //    this.persister.game.myActive(function (games) {
+        //        var list = ui.activeGamesList(games);
+        //        $(selector + " #active-games")
+        //			.html(list);
+        //    });
+        //    this.persister.message.all(function (msg) {
+        //        var msgList = ui.messagesList(msg);
+        //        $(selector + " #messages-holder").html(msgList);
+        //    });
+        //}
     });
     return {
         get: function () {

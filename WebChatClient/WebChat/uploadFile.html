@@ -31,7 +31,7 @@
             $('#Upload').click(function () {
                 var formData = new FormData($('form')[0]);
                 var request = $.ajax({
-                    url: 'teammilhouse-2.apphb.com/api/user/changeavatar/' + localStorage.getItem("sessionKey"),
+                    url: 'teammilhouse-2.apphb.com/api/user/changeavatar/' + localStorage.getItem("user").sessionKey,
                     type: 'POST',
                     // Form data
                     data: formData,
