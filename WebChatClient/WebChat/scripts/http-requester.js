@@ -21,8 +21,20 @@ var httpRequester = (function () {
 			error: error
 		});
 	}
+	function putJSON(url, data, success, error) {
+		$.ajax({
+			url: url,
+			type: "PUT",
+			contentType: "application/json",
+			timeout: 5000,
+			data: JSON.stringify(data),
+			success: success,
+			error: error
+		});
+	}
 	return {
 		getJSON: getJSON,
-		postJSON: postJSON
+		postJSON: postJSON,
+		putJSON: putJSON
 	};
 }());

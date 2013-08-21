@@ -64,12 +64,12 @@
     <Content Include="scripts\http-requester.js" />
     <Content Include="scripts\jquery-2.0.2.min.js" />
     <Content Include="scripts\persister.js" />
+    <Content Include="scripts\pubnub.js" />
     <Content Include="scripts\tab.js" />
     <Content Include="scripts\ui.js" />
     <Content Include="styles\bootstrap.min.css" />
     <Content Include="styles\codiqa.ext.css" />
     <Content Include="styles\style.css" />
-    <Content Include="uploadFile.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

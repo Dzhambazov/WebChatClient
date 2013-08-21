@@ -47,11 +47,11 @@
         '<div id="acc-container" data-role="collapsible-set" data-theme="b" data-content-theme="a">';
         for (var i = 0; i < data.length; i++) {
             if (username != data[i].username) {
-                users += '<button class="otherUsers"><img src="http://png.findicons.com/files/icons/2166/oxygen/64/kbugbuster.png"  width="40" height="40"/><span>' + data[i].username + '</span></button>';
+                users += '<button class="otherUsers"><img src="' + data[i].Avatar + '"  width="40" height="40"/><span>' + data[i].username + '</span></button>';
                 chats += '<div id="textFields" class="chat" name="' + data[i].username + '">' +
-                        '<textarea id="received"></textarea>' +
+                        '<textarea class="chatArea" id="received-' + data[i].username + '"></textarea>' +
                         '<textarea id="send"></textarea>' +
-                        '<a href="#" data-role="button" data-inline="true" data-theme="b" style="margin-top:-35px">Send</a>' +
+                        '<a href="#" class="send-msg" data-role="button" data-inline="true" data-theme="b" style="margin-top:-35px" id="' + data[i].username + '">Send</a>' +
                     '</div>';
             }
         }

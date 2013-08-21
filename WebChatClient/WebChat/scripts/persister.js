@@ -35,6 +35,9 @@ var persisters = (function () {
         },
         username: function () {
             return this.username;
+        },
+        avatar: function () {
+            return this.avatar;
         }
     });
     var UserPersister = Class.create({
@@ -70,9 +73,9 @@ var persisters = (function () {
         },
         logout: function (success, error) {
             var url = this.rootUrl + "logout/" + sessionKey;
-            httpRequester.getJSON(url, function (data) {
+            httpRequester.getJSON(url, function () {
                 clearUserData();
-                success(data);
+                success();
             }, error)
         },
         scores: function (success, error) {

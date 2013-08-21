@@ -3,7 +3,7 @@
 	<title></title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
     <script type="text/javascript" src="scripts/jquery-2.0.2.min.js"></script>
- <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+ <script type="text/javascript" src="scripts/bootstrap.min.js"></script>    
     <script type="text/javascript" src="scripts/tab.js"></script>
     <script type="text/javascript" src="scripts/http-requester.js"></script>
     <script type="text/javascript" src="scripts/class.js"></script>
@@ -13,6 +13,9 @@
     <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
 
     <script src="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+    <script src="http://cdn.pubnub.com/pubnub-3.5.3.min.js"></script>
+    <script type="text/javascript" src="scripts/pubnub.js"></script>
  <link rel="stylesheet" href="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.css">
 
  <link type="text/ccss" rel="stylesheet" href="styles/bootstrap.min.css" />
@@ -57,6 +60,29 @@
     jQuery(document).ready(function ($) {
         $('#tabs').tab();
     });
+
+    pubnub.subscribe({
+        channel: "channel",
+        callback: function (message) {
+            // Received a message --> print it in the page
+            //document.getElementById('messagesArea').innerHTML += message + '\n';
+            var currUser = localStorage.getItem("username");
+            console.log("dotuk dobre");
+            var split = message.users.split('~');
+            if (split[0] == currUser || split[1] == currUser) {
+                var receiver = split[0];
+                if (currUser == split[0]) {
+                    receiver = split[1];
+                }
+                var theid = "received-" + receiver;
+                console.log(theid);
+                console.log(message.message);               
+                document.getElementById(theid).innerHTML += message.message + '\n';
+               
+            }
+            
+        }
+    })
 </script>    
 </div> <!-- container -->
 </body>

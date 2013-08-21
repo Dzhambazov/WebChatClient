@@ -121,3 +121,14 @@ textarea#send{
 .otherUsers {
     cursor: pointer;
 }
+
+.chatArea {
+    width: 300px;
+    height:300px;
+}
+
+#send {
+    width: 250px;
+    display:inline-block;
+
+}
